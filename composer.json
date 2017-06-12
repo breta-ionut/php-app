@@ -1,0 +1,21 @@
+{
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "require": {
+        "symfony/http-foundation": "^3.2",
+        "symfony/http-kernel": "^3.2",
+        "symfony/dependency-injection": "^3.2",
+        "symfony/config": "^3.2",
+        "symfony/yaml": "^3.2",
+        "symfony/routing": "^3.2",
+        "symfony/security": "^3.2",
+        "symfony/templating": "^3.2",
+        "doctrine/dbal": "^2.5",
+        "symfony/dotenv": "dev-master",
+        "symfony/finder": "^3.2",
+        "symfony/console": "^3.2"
+    }
+}

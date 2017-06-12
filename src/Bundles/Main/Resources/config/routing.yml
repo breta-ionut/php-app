@@ -1,0 +1,3 @@
+main_home:
+    path: /
+    defaults: {_controller: 'Bundles\Main\Controller\MainController::indexAction'}

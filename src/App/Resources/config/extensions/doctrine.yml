@@ -1,0 +1,18 @@
+services:
+    doctrine.connection:
+        class: Doctrine\DBAL\Connection
+        factory: [App\Doctrine\ConnectionFactory, factory]
+        arguments:
+            - '%doctrine.driver%'
+            - '%doctrine.host%'
+            - '%doctrine.port%'
+            - '%doctrine.user%'
+            - '%doctrine.password%'
+            - '%doctrine.database%'
+
+    doctrine:
+        alias: doctrine.connection
+
+    doctrine.schema_manager:
+        class: App\Doctrine\SchemaManager
+        arguments: ['@kernel', '@doctrine']

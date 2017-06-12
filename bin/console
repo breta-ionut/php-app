@@ -1,0 +1,14 @@
+#!/usr/bin/php
+<?php
+
+use App\Kernel;
+use App\Console\Application;
+
+error_reporting(-1);
+ini_set('display_errors', 'on');
+
+require __DIR__.'/../vendor/autoload.php';
+
+$kernel = new Kernel(getenv('env') ?: 'dev', getenv('debug') ?: true);
+$application = new Application($kernel, Kernel::VERSION);
+$application->run();

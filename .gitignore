@@ -1,0 +1,7 @@
+.idea
+etc/parameters.env
+var/cache/*
+!var/cache/.gitkeep
+var/logs/*
+!var/logs/.gitkeep
+vendor
