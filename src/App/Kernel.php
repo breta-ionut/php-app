@@ -2,11 +2,11 @@
 
 namespace App;
 
-use App\DependencyInjection\Compiler\EventsPass;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
@@ -125,6 +125,6 @@ class Kernel extends BaseKernel
      */
     private function addDefaultCompilerPasses(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new EventsPass());
+        $container->addCompilerPass(new RegisterListenersPass());
     }
 }
