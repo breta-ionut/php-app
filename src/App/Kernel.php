@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
-use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 /**
@@ -28,15 +28,8 @@ class Kernel extends BaseKernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        // Load internal config files.
-        $finder = new Finder();
-        $finder->files()
-            ->name('*.yml')
-            ->in($this->rootDir.'/Resources/config/main');
-
-        foreach ($finder as $configFile) {
-            $loader->load((string) $configFile);
-        }
+        // Load the internal services config file.
+        $loader->load($this->rootDir.'/Resources/config/services.yml');
 
         // Load the application config file.
         $loader->load($this->rootDir.'/../../etc/config_'.$this->environment.'.yml');
@@ -56,6 +49,14 @@ class Kernel extends BaseKernel
     public function getLogDir()
     {
         return $this->rootDir.'/../../var/logs';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getHttpKernel()
+    {
+        return $this->container->get(HttpKernel::class);
     }
 
     /**
