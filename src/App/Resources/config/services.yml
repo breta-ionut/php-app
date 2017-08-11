@@ -7,6 +7,7 @@ services:
     App\:
         resource: '../../*'
 
+    # The application kernel.
     App\Kernel:
         synthetic: true
         public: true
@@ -25,3 +26,17 @@ services:
 
     Symfony\Component\HttpKernel\HttpKernel:
         public: true
+
+    # The application routing system.
+    Symfony\Component\Routing\Router:
+        factory: [App\Routing\RouterFactory, factory]
+        autowire: true
+
+    App\Routing\RouterListener:
+        tags:
+            - {name: kernel.event_listener, event: kernel.request, method: onRequest, priority: 32}
+
+    # The application templating system.
+    Symfony\Component\Templating\EngineInterface:
+        factory: [App\Templating\TemplatingEngineFactory, factory]
+        arguments: ["%kernel.root_dir%"]

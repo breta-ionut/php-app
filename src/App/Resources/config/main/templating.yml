@@ -1,5 +1,0 @@
-services:
-    templating:
-        class: Symfony\Component\Templating\EngineInterface
-        factory: [App\Templating\TemplatingEngineFactory, factory]
-        arguments: ["%kernel.root_dir%"]
