@@ -35,7 +35,7 @@ services:
             $rootDir: "%kernel.root_dir%"
             $cacheDir: "%kernel.cache_dir%"
             $debug: "%kernel.debug%"
-        autowire: true
+        public: true
 
     App\Routing\RouterListener:
         tags:
@@ -45,3 +45,4 @@ services:
     Symfony\Component\Templating\EngineInterface:
         factory: [App\Templating\TemplatingEngineFactory, factory]
         arguments: ["%kernel.root_dir%"]
+        public: true

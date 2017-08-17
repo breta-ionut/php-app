@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Templating\EngineInterface;
 
 /**
  * The application's base controller.
@@ -40,7 +41,7 @@ abstract class BaseController implements ContainerAwareInterface
             $response = new Response();
         }
 
-        $content = $this->get('templating')->render($template, $parameters);
+        $content = $this->get(EngineInterface::class)->render($template, $parameters);
         $response->setContent($content);
 
         return $response;
