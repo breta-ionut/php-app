@@ -8,9 +8,10 @@ services:
         resource: '../../*'
 
     # The application kernel.
-    App\Kernel:
+    kernel:
         synthetic: true
         public: true
+    Symfony\Component\HttpKernel\KernelInterface: '@kernel'
 
     Symfony\Component\EventDispatcher\EventDispatcher:
         public: true
@@ -30,6 +31,10 @@ services:
     # The application routing system.
     Symfony\Component\Routing\Router:
         factory: [App\Routing\RouterFactory, factory]
+        arguments:
+            $rootDir: "%kernel.root_dir%"
+            $cacheDir: "%kernel.cache_dir%"
+            $debug: "%kernel.debug%"
         autowire: true
 
     App\Routing\RouterListener:
