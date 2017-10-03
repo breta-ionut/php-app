@@ -16,6 +16,8 @@
         "doctrine/dbal": "^2.5",
         "symfony/dotenv": "^3.3",
         "symfony/finder": "^3.3",
-        "symfony/console": "^3.3"
+        "symfony/console": "^3.3",
+        "symfony/asset": "^3.3",
+        "doctrine/orm": "^2.5"
     }
 }
