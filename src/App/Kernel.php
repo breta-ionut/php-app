@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\DependencyInjection\DoctrineExtension;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
@@ -100,7 +101,9 @@ class Kernel extends BaseKernel
      */
     private function getDefaultExtensions(): array
     {
-        return [];
+        return [
+            new DoctrineExtension(),
+        ];
     }
 
     /**
