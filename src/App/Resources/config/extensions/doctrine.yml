@@ -16,3 +16,4 @@ services:
             - "%doctrine.database%"
             - "%kernel.environment%"
             - "%kernel.project_dir%"
+        public: true
