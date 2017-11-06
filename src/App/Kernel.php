@@ -22,7 +22,7 @@ class Kernel extends BaseKernel
      */
     public function registerBundles()
     {
-        return require $this->rootDir.'/../../etc/bundles.php';
+        return require $this->rootDir.'/../../config/bundles.php';
     }
 
     /**
@@ -34,7 +34,7 @@ class Kernel extends BaseKernel
         $loader->load($this->rootDir.'/Resources/config/services.yml');
 
         // Load the application config file.
-        $loader->load($this->rootDir.'/../../etc/config_'.$this->environment.'.yml');
+        $loader->load($this->rootDir.'/../../config/config_'.$this->environment.'.yml');
     }
 
     /**
@@ -67,7 +67,7 @@ class Kernel extends BaseKernel
     protected function initializeContainer()
     {
         $dotenv = new Dotenv();
-        $dotenv->load($this->rootDir.'/../../etc/parameters.env');
+        $dotenv->load($this->rootDir.'/../../config/parameters.env');
 
         parent::initializeContainer();
     }

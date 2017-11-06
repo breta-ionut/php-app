@@ -37,7 +37,7 @@ class RouterFactory
             $requestContext->fromRequest($request);
         }
 
-        $loader = new YamlFileLoader(new FileLocator($kernel, $rootDir.'/../../etc/'));
+        $loader = new YamlFileLoader(new FileLocator($kernel, $rootDir.'/../../config/'));
         $router = new Router($loader, 'routing.yml', ['cache_dir' => $cacheDir, 'debug' => $debug], $requestContext);
 
         return $router;

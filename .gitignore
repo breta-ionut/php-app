@@ -1,5 +1,5 @@
 .idea
-etc/parameters.env
+config/parameters.env
 var/cache/*
 !var/cache/.gitkeep
 var/logs/*

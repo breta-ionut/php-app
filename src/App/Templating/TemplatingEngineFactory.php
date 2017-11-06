@@ -22,7 +22,7 @@ class TemplatingEngineFactory
      */
     public static function factory(string $rootDir): EngineInterface
     {
-        $loader = new FilesystemLoader([$rootDir.'/../../views/%name%']);
+        $loader = new FilesystemLoader([$rootDir.'/../../templates/%name%']);
         $engine = new PhpEngine(new TemplateNameParser(), $loader, [new SlotsHelper()]);
 
         return $engine;
