@@ -17,7 +17,8 @@ services:
         public: true
     Symfony\Component\EventDispatcher\EventDispatcherInterface: '@Symfony\Component\EventDispatcher\EventDispatcher'
 
-    Symfony\Component\HttpKernel\Controller\ControllerResolverInterface: '@App\HttpKernel\ControllerResolver'
+    Symfony\Component\HttpKernel\Controller\ContainerControllerResolver:
+    Symfony\Component\HttpKernel\Controller\ControllerResolverInterface: '@Symfony\Component\HttpKernel\Controller\ContainerControllerResolver'
 
     Symfony\Component\HttpFoundation\RequestStack:
         public: true
