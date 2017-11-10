@@ -24,6 +24,8 @@ services:
         public: true
 
     Symfony\Component\HttpKernel\Controller\ArgumentResolver:
+        factory: [App\Controller\ArgumentResolver\ArgumentResolverFactory, factory]
+        arguments: ["@service_container"]
     Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface: '@Symfony\Component\HttpKernel\Controller\ArgumentResolver'
 
     Symfony\Component\HttpKernel\HttpKernel:
