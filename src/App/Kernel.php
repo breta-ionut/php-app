@@ -41,8 +41,10 @@ class Kernel extends BaseKernel
         // Load the internal services config file.
         $loader->load($this->rootDir.'/Resources/config/services.yml');
 
-        // Load the application config file.
-        $loader->load($this->getConfigDir().'/config_'.$this->environment.'.yml');
+        // Load the application's config files.
+        $configDir = $this->getConfigDir();
+        $loader->load($configDir.'/packages/*.yml', 'glob');
+        $loader->load($configDir.'/packages/'.$this->environment.'/*.yml', 'glob');
     }
 
     /**
