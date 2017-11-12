@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\DependencyInjection\ApplicationExtension;
 use App\DependencyInjection\DoctrineExtension;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -38,11 +39,9 @@ class Kernel extends BaseKernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        // Load the internal services config file.
-        $loader->load($this->rootDir.'/Resources/config/services.yml');
+        $configDir = $this->getConfigDir();
 
         // Load the application's config files.
-        $configDir = $this->getConfigDir();
         $loader->load($configDir.'/packages/*.yml', 'glob');
         if (is_dir($configDir.'/packages/'.$this->environment)) {
             $loader->load($configDir.'/packages/'.$this->environment.'/*.yml', 'glob');
@@ -142,6 +141,7 @@ class Kernel extends BaseKernel
     private function getDefaultExtensions(): array
     {
         return [
+            new ApplicationExtension(),
             new DoctrineExtension(),
         ];
     }
