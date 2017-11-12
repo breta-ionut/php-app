@@ -22,7 +22,15 @@ class Kernel extends BaseKernel
      */
     public function registerBundles()
     {
-        return require $this->getConfigDir().'/bundles.php';
+        $bundlesConfig = require $this->getConfigDir().'/bundles.php';
+        $bundles = [];
+        foreach ($bundlesConfig as $class => $envs) {
+            if (!empty($envs['all']) || !empty($envs[$this->environment])) {
+                $bundles[] = new $class();
+            }
+        }
+
+        return $bundles;
     }
 
     /**

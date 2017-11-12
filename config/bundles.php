@@ -1,7 +1,5 @@
 <?php
 
-/** @var $this \App\Kernel */
-
 return [
-    new \Bundles\Main\MainBundle(),
+    'Bundles\Main\MainBundle' => ['all' => true],
 ];
