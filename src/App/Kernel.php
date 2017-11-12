@@ -22,7 +22,7 @@ class Kernel extends BaseKernel
      */
     public function registerBundles()
     {
-        return require $this->rootDir.'/../../config/bundles.php';
+        return require $this->getConfigDir().'/bundles.php';
     }
 
     /**
@@ -34,7 +34,7 @@ class Kernel extends BaseKernel
         $loader->load($this->rootDir.'/Resources/config/services.yml');
 
         // Load the application config file.
-        $loader->load($this->rootDir.'/../../config/config_'.$this->environment.'.yml');
+        $loader->load($this->getConfigDir().'/config_'.$this->environment.'.yml');
     }
 
     /**
@@ -42,7 +42,7 @@ class Kernel extends BaseKernel
      */
     public function getCacheDir()
     {
-        return $this->rootDir.'/../../var/cache/'.$this->environment;
+        return $this->getProjectDir().'/var/cache/'.$this->environment;
     }
 
     /**
@@ -50,7 +50,7 @@ class Kernel extends BaseKernel
      */
     public function getLogDir()
     {
-        return $this->rootDir.'/../../var/logs';
+        return $this->getProjectDir().'/var/logs';
     }
 
     /**
@@ -67,7 +67,7 @@ class Kernel extends BaseKernel
     protected function initializeContainer()
     {
         $dotenv = new Dotenv();
-        $dotenv->load($this->rootDir.'/../../config/parameters.env');
+        $dotenv->load($this->getConfigDir().'/parameters.env');
 
         parent::initializeContainer();
     }
@@ -121,7 +121,7 @@ class Kernel extends BaseKernel
      */
     private function getConfigDir(): string
     {
-        return realpath($this->rootDir.'/config') ?: $this->rootDir.'/config';
+        return realpath($this->getProjectDir().'/config') ?: $this->getProjectDir().'/config';
     }
 
     /**
