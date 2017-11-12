@@ -115,18 +115,6 @@ class Kernel extends BaseKernel
     }
 
     /**
-     * Returns the default container extensions to be loaded.
-     *
-     * @return ExtensionInterface[]
-     */
-    private function getDefaultExtensions(): array
-    {
-        return [
-            new DoctrineExtension(),
-        ];
-    }
-
-    /**
      * Returns the application's config directory path.
      *
      * @return string
@@ -144,6 +132,18 @@ class Kernel extends BaseKernel
     private function addDefaultCompilerPasses(ContainerBuilder $container)
     {
         $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class));
+    }
+
+    /**
+     * Returns the default container extensions to be loaded.
+     *
+     * @return ExtensionInterface[]
+     */
+    private function getDefaultExtensions(): array
+    {
+        return [
+            new DoctrineExtension(),
+        ];
     }
 
     /**
