@@ -75,11 +75,9 @@ class Kernel extends BaseKernel
     /**
      * {@inheritdoc}
      */
-    protected function prepareContainer(ContainerBuilder $container)
+    protected function getKernelParameters()
     {
-        parent::prepareContainer($container);
-
-        $this->addDefaultExtensions($container);
+        return array_merge(parent::getKernelParameters(), ['kernel.config_dir' => $this->getConfigDir()]);
     }
 
     /**
@@ -95,6 +93,16 @@ class Kernel extends BaseKernel
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function prepareContainer(ContainerBuilder $container)
+    {
+        parent::prepareContainer($container);
+
+        $this->addDefaultExtensions($container);
+    }
+
+    /**
      * Returns the default container extensions to be loaded.
      *
      * @return ExtensionInterface[]
@@ -104,6 +112,26 @@ class Kernel extends BaseKernel
         return [
             new DoctrineExtension(),
         ];
+    }
+
+    /**
+     * Returns the application's config directory path.
+     *
+     * @return string
+     */
+    private function getConfigDir(): string
+    {
+        return realpath($this->rootDir.'/config') ?: $this->rootDir.'/config';
+    }
+
+    /**
+     * Registers the default compiler passes to the container.
+     *
+     * @param ContainerBuilder $container
+     */
+    private function addDefaultCompilerPasses(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class));
     }
 
     /**
@@ -121,15 +149,5 @@ class Kernel extends BaseKernel
                 $container->loadFromExtension($alias, []);
             }
         }
-    }
-
-    /**
-     * Registers the default compiler passes to the container.
-     *
-     * @param ContainerBuilder $container
-     */
-    private function addDefaultCompilerPasses(ContainerBuilder $container)
-    {
-        $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class));
     }
 }
