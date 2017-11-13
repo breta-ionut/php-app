@@ -3,6 +3,7 @@
 namespace App;
 
 use App\DependencyInjection\ApplicationExtension;
+use App\DependencyInjection\Compiler\ContainerAwarePass;
 use App\DependencyInjection\DoctrineExtension;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -130,7 +131,8 @@ class Kernel extends BaseKernel
      */
     private function addDefaultCompilerPasses(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class));
+        $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class))
+            ->addCompilerPass(new ContainerAwarePass());
     }
 
     /**

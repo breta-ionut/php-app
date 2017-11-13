@@ -2,11 +2,11 @@
 
 namespace App\DependencyInjection;
 
+use App\DependencyInjection\Compiler\ContainerAwarePass;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -22,8 +22,8 @@ class ApplicationExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('application.yml');
 
-        // Inject the service container in all container aware services.
+        // Tag all services implementing the container aware interface with the container aware tag.
         $container->registerForAutoconfiguration(ContainerAwareInterface::class)
-            ->addMethodCall('setContainer', [new Reference('service_container')]);
+            ->addTag(ContainerAwarePass::CONTAINER_AWARE_TAG);
     }
 }
