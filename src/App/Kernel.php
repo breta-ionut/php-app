@@ -11,6 +11,8 @@ use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
+use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
@@ -132,6 +134,7 @@ class Kernel extends BaseKernel
     private function addDefaultCompilerPasses(ContainerBuilder $container)
     {
         $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class))
+            ->addCompilerPass(new RegisterControllerArgumentLocatorsPass(ArgumentResolverInterface::class))
             ->addCompilerPass(new ContainerAwarePass());
     }
 
