@@ -23,10 +23,9 @@ services:
     Symfony\Component\HttpFoundation\RequestStack:
         public: true
 
-    Symfony\Component\HttpKernel\Controller\ArgumentResolver:
+    Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface:
         factory: [App\Controller\ArgumentResolver\ArgumentResolverFactory, factory]
         arguments: ["@service_container"]
-    Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface: '@Symfony\Component\HttpKernel\Controller\ArgumentResolver'
 
     Symfony\Component\HttpKernel\HttpKernel:
         public: true
