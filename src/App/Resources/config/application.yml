@@ -32,7 +32,7 @@ services:
         public: true
 
     # The application routing system.
-    Symfony\Component\Routing\Router:
+    Symfony\Component\Routing\RouterInterface:
         factory: [App\Routing\RouterFactory, factory]
         arguments:
             $rootDir: "%kernel.root_dir%"
