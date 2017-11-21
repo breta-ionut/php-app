@@ -16,13 +16,13 @@ class TemplatingEngineFactory
     /**
      * Instantiates the app's templating engine.
      *
-     * @param string $rootDir
+     * @param string $projectDir
      *
      * @return EngineInterface
      */
-    public static function factory(string $rootDir): EngineInterface
+    public static function factory(string $projectDir): EngineInterface
     {
-        $loader = new FilesystemLoader([$rootDir.'/../../templates/%name%']);
+        $loader = new FilesystemLoader([$projectDir.'/templates/%name%']);
         $engine = new PhpEngine(new TemplateNameParser(), $loader, [new SlotsHelper()]);
 
         return $engine;

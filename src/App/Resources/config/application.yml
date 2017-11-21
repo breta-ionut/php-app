@@ -34,7 +34,7 @@ services:
     Symfony\Component\Routing\RouterInterface:
         factory: [App\Routing\RouterFactory, factory]
         arguments:
-            $rootDir: "%kernel.root_dir%"
+            $projectDir: "%kernel.project_dir%"
             $cacheDir: "%kernel.cache_dir%"
             $debug: "%kernel.debug%"
         public: true
@@ -46,5 +46,5 @@ services:
     # The application templating system.
     Symfony\Component\Templating\EngineInterface:
         factory: [App\Templating\TemplatingEngineFactory, factory]
-        arguments: ["%kernel.root_dir%"]
+        arguments: ["%kernel.project_dir%"]
         public: true

@@ -19,7 +19,7 @@ class RouterFactory
      *
      * @param KernelInterface $kernel
      * @param RequestStack    $requestStack
-     * @param string          $rootDir
+     * @param string          $projectDir
      * @param string          $cacheDir
      * @param bool            $debug
      *
@@ -28,7 +28,7 @@ class RouterFactory
     public static function factory(
         KernelInterface $kernel,
         RequestStack $requestStack,
-        string $rootDir,
+        string $projectDir,
         string $cacheDir,
         bool $debug
     ): Router {
@@ -37,7 +37,7 @@ class RouterFactory
             $requestContext->fromRequest($request);
         }
 
-        $loader = new YamlFileLoader(new FileLocator($kernel, $rootDir.'/../../config/'));
+        $loader = new YamlFileLoader(new FileLocator($kernel, $projectDir.'/config/'));
         $router = new Router($loader, 'routing.yml', ['cache_dir' => $cacheDir, 'debug' => $debug], $requestContext);
 
         return $router;
