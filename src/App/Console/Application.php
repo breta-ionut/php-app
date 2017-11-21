@@ -2,12 +2,11 @@
 
 namespace App\Console;
 
-use App\Command\Doctrine\SchemaDropCommand;
-use App\Command\Doctrine\SchemaUpdateCommand;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -57,7 +56,7 @@ class Application extends BaseApplication
         }
 
         // Register the event dispatcher.
-        $this->setDispatcher($container->get('event_dispatcher'));
+        $this->setDispatcher($container->get(EventDispatcherInterface::class));
 
         return parent::doRun($input, $output);
     }
@@ -103,18 +102,7 @@ class Application extends BaseApplication
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getDefaultCommands()
-    {
-        return array_merge(parent::getDefaultCommands(), [
-            new SchemaDropCommand(),
-            new SchemaUpdateCommand(),
-        ]);
-    }
-
-    /**
-     * Registers commands from the kernel's bundles.
+     * Registers the commands defined in the application.
      */
     private function registerCommands()
     {
@@ -125,9 +113,18 @@ class Application extends BaseApplication
         // Ensure the kernel is booted.
         $this->kernel->boot();
 
+        // Register the commands exposed by the bundles.
         foreach ($this->kernel->getBundles() as $bundle) {
             if ($bundle instanceof Bundle) {
                 $bundle->registerCommands($this);
+            }
+        }
+
+        // Register the commands declared as services.
+        $container = $this->kernel->getContainer();
+        if ($container->hasParameter('console.command.ids')) {
+            foreach ($container->getParameter('console.command.ids') as $id) {
+                $this->add($container->get($id));
             }
         }
 
