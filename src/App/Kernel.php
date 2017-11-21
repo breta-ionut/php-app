@@ -6,6 +6,7 @@ use App\DependencyInjection\ApplicationExtension;
 use App\DependencyInjection\Compiler\ContainerAwarePass;
 use App\DependencyInjection\DoctrineExtension;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\Dotenv\Dotenv;
@@ -135,6 +136,7 @@ class Kernel extends BaseKernel
     {
         $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class))
             ->addCompilerPass(new RegisterControllerArgumentLocatorsPass(ArgumentResolverInterface::class))
+            ->addCompilerPass(new AddConsoleCommandPass())
             ->addCompilerPass(new ContainerAwarePass());
     }
 
