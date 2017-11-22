@@ -31,13 +31,15 @@ services:
         public: true
 
     # The application routing system.
-    Symfony\Component\Routing\RouterInterface:
+    Symfony\Component\Routing\Router:
         factory: [App\Routing\RouterFactory, factory]
         arguments:
             $bundles: "%kernel.bundles_metadata%"
             $cacheDir: "%kernel.cache_dir%"
             $debug: "%kernel.debug%"
         public: true
+    Symfony\Component\Routing\RouterInterface: '@Symfony\Component\Routing\Router'
+    Symfony\Component\Routing\Matcher\RequestMatcherInterface: '@Symfony\Component\Routing\Router'
 
     App\Routing\RouterListener:
         tags:
