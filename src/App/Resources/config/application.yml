@@ -34,7 +34,7 @@ services:
     Symfony\Component\Routing\RouterInterface:
         factory: [App\Routing\RouterFactory, factory]
         arguments:
-            $projectDir: "%kernel.project_dir%"
+            $bundles: "%kernel.bundles_metadata%"
             $cacheDir: "%kernel.cache_dir%"
             $debug: "%kernel.debug%"
         public: true
