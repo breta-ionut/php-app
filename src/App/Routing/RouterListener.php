@@ -3,7 +3,7 @@
 namespace App\Routing;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
 
 /**
  * Matches defined application routes with user requests.
@@ -11,18 +11,18 @@ use Symfony\Component\Routing\RouterInterface;
 class RouterListener
 {
     /**
-     * @var RouterInterface
+     * @var RequestMatcherInterface
      */
-    private $router;
+    private $requestMatcher;
 
     /**
      * The listener constructor.
      *
-     * @param RouterInterface $router
+     * @param RequestMatcherInterface $requestMatcher
      */
-    public function __construct(RouterInterface $router)
+    public function __construct(RequestMatcherInterface $requestMatcher)
     {
-        $this->router = $router;
+        $this->requestMatcher = $requestMatcher;
     }
 
     /**
@@ -33,6 +33,6 @@ class RouterListener
     public function onRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        $request->attributes->add($this->router->match($request->getPathInfo()));
+        $request->attributes->add($this->requestMatcher->matchRequest($request));
     }
 }
