@@ -21,7 +21,7 @@ class ApplicationExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('application.yml');
+        $loader->load('application.yaml');
 
         // Tag all services implementing the container aware interface with the container aware tag.
         $container->registerForAutoconfiguration(ContainerAwareInterface::class)

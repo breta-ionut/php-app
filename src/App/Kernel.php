@@ -46,9 +46,9 @@ class Kernel extends BaseKernel
         $configDir = $this->getConfigDir();
 
         // Load the application's config files.
-        $loader->load($configDir.'/packages/*.yml', 'glob');
+        $loader->load($configDir.'/packages/*.yaml', 'glob');
         if (is_dir($configDir.'/packages/'.$this->environment)) {
-            $loader->load($configDir.'/packages/'.$this->environment.'/*.yml', 'glob');
+            $loader->load($configDir.'/packages/'.$this->environment.'/*.yaml', 'glob');
         }
     }
 

@@ -20,7 +20,7 @@ class DoctrineExtension extends ConfigurableExtension
     protected function loadInternal(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('doctrine.yml');
+        $loader->load('doctrine.yaml');
 
         foreach ($configs as $key => $value) {
             $container->setParameter("doctrine.$key", $value);
