@@ -15,5 +15,5 @@ services:
             - "%doctrine.password%"
             - "%doctrine.database%"
             - "%kernel.environment%"
-            - "%kernel.project_dir%"
+            - "%kernel.bundles_metadata%"
         public: true
