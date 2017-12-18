@@ -13,6 +13,8 @@ use Symfony\Component\Templating\TemplateNameParser;
  */
 class TemplatingEngineFactory
 {
+    private const APP_TEMPLATES_PATH = 'templates/%name%';
+
     /**
      * Instantiates the app's templating engine.
      *
@@ -22,7 +24,7 @@ class TemplatingEngineFactory
      */
     public static function factory(string $projectDir): EngineInterface
     {
-        $loader = new FilesystemLoader([$projectDir.'/templates/%name%']);
+        $loader = new FilesystemLoader([$projectDir.'/'.self::APP_TEMPLATES_PATH]);
         $engine = new PhpEngine(new TemplateNameParser(), $loader, [new SlotsHelper()]);
 
         return $engine;

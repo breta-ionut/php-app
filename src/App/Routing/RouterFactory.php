@@ -13,28 +13,40 @@ use Symfony\Component\Routing\Router;
  */
 class RouterFactory
 {
+    private const BUNDLE_ROUTING_CONFIG_PATH = 'Resources/config/routing.yaml';
+    private const APP_ROUTING_CONFIG_PATH = 'routing.yaml';
+
     /**
      * Creates a router instance.
      *
      * @param array        $bundles      The bundles metadata.
+     * @param string       $configDir
      * @param string       $cacheDir
      * @param bool         $debug
      * @param RequestStack $requestStack
      *
      * @return Router
      */
-    public static function factory(array $bundles, string $cacheDir, bool $debug, RequestStack $requestStack): Router
-    {
+    public static function factory(
+        array $bundles,
+        string $configDir,
+        string $cacheDir,
+        bool $debug,
+        RequestStack $requestStack
+    ): Router {
         $loader = new YamlFilesLoader(new FileLocator());
 
         // Get the routing configs from the bundles.
         $routingConfigs = [];
         foreach ($bundles as $bundle) {
-            $routingConfig = $bundle['path'].'/Resources/config/routing.yaml';
+            $routingConfig = $bundle['path'].'/'.self::BUNDLE_ROUTING_CONFIG_PATH;
             if (file_exists($routingConfig)) {
                 $routingConfigs[] = $routingConfig;
             }
         }
+
+        // Append the global routing config file.
+        $routingConfigs[] = $configDir.'/'.self::APP_ROUTING_CONFIG_PATH;
 
         // Build the request context.
         $requestContext = new RequestContext();

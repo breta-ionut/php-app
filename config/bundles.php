@@ -1,3 +1,5 @@
 <?php
 
-return [];
+return [
+    \Bundles\User\UserBundle::class => ['all' => true],
+];

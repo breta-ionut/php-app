@@ -15,7 +15,7 @@ class EntityManagerFactory
 {
     private const MAPPING_BUNDLE_PATH = 'Resources/config/doctrine';
     private const MAPPING_BUNDLE_NAMESPACE = 'Model';
-    private const MAPPING_FILES_EXTENSION = 'yaml';
+    private const MAPPING_FILES_EXTENSION = '.yaml';
 
     /**
      * Creates an entity manager given the database connection and some application details.

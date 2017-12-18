@@ -1,0 +1,3 @@
+user_user_login:
+    path: /
+    defaults: {_controller: Bundles\User\Controller\UserController:loginAction}

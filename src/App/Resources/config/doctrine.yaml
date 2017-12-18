@@ -4,8 +4,7 @@ services:
         autoconfigure: true
         public: false
 
-    doctrine:
-        class: Doctrine\ORM\EntityManagerInterface
+    Doctrine\ORM\EntityManagerInterface:
         factory: [App\Doctrine\EntityManagerFactory, factory]
         arguments:
             - "%doctrine.driver%"

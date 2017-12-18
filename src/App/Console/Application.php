@@ -102,6 +102,16 @@ class Application extends BaseApplication
     }
 
     /**
+     * The kernel getter.
+     *
+     * @return KernelInterface
+     */
+    public function getKernel(): KernelInterface
+    {
+        return $this->kernel;
+    }
+
+    /**
      * Registers the commands defined in the application.
      */
     private function registerCommands()
