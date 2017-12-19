@@ -55,10 +55,11 @@ class EntityManagerFactory
         // Determine the paths where the mapping files should be located.
         $mappingPaths = [];
         foreach ($bundles as $bundle) {
-            $bundleMappingPath = $bundle['path'].'/'.self::MAPPING_BUNDLE_PATH;
-            $bundleMappingNamespace = $bundle['namespace'].'\\'.self::MAPPING_BUNDLE_NAMESPACE;
+            if (!is_dir($bundleMappingPath = $bundle['path'].'/'.self::MAPPING_BUNDLE_PATH)) {
+                continue;
+            }
 
-            $mappingPaths[$bundleMappingPath] = $bundleMappingNamespace;
+            $mappingPaths[$bundleMappingPath] = $bundle['namespace'].'\\'.self::MAPPING_BUNDLE_NAMESPACE;
         }
 
         $config = Setup::createConfiguration($isDev);
