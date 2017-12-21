@@ -45,6 +45,16 @@ class DoctrineConfiguration implements ConfigurationInterface
                 ->scalarNode('database')
                     ->cannotBeEmpty()
                 ->end()
+
+                ->scalarNode('charset')
+                    ->cannotBeEmpty()
+                    ->defaultValue('utf8mb4')
+                ->end()
+
+                ->scalarNode('collate')
+                    ->cannotBeEmpty()
+                    ->defaultValue('utf8mb4_unicode_ci')
+                ->end()
             ->end();
 
         return $treeBuilder;
