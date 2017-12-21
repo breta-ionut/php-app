@@ -2,6 +2,7 @@
 
 namespace App\Doctrine;
 
+use Doctrine\Common\EventManager;
 use Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,14 +21,19 @@ class EntityManagerFactory
     /**
      * Creates an entity manager given the database connection parameters and some application details.
      *
-     * @param array  $connectionParams The database connection parameters (driver, host, etc.).
-     * @param string $env              The application environment (dev, prod).
-     * @param array  $bundles          The application bundles metadata.
+     * @param array        $connectionParams The database connection parameters (driver, host, etc.).
+     * @param string       $env              The application environment (dev, prod).
+     * @param array        $bundles          The application bundles metadata.
+     * @param EventManager $eventManager
      *
      * @return EntityManagerInterface
      */
-    public static function factory(array $connectionParams, string $env, array $bundles): EntityManagerInterface
-    {
+    public static function factory(
+        array $connectionParams,
+        string $env,
+        array $bundles,
+        EventManager $eventManager
+    ): EntityManagerInterface {
         $isDev = in_array($env, ['dev', 'test'], true);
 
         // Determine the paths where the mapping files should be located.
@@ -46,6 +52,6 @@ class EntityManagerFactory
             self::MAPPING_FILES_EXTENSION
         )));
 
-        return EntityManager::create($connectionParams, $config);
+        return EntityManager::create($connectionParams, $config, $eventManager);
     }
 }
