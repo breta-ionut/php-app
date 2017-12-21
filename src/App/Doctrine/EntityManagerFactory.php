@@ -18,38 +18,16 @@ class EntityManagerFactory
     private const MAPPING_FILES_EXTENSION = '.yaml';
 
     /**
-     * Creates an entity manager given the database connection and some application details.
+     * Creates an entity manager given the database connection parameters and some application details.
      *
-     * @param string $driver   The database driver (e.g. pdo_mysql).
-     * @param string $host
-     * @param int    $port
-     * @param string $user
-     * @param string $password
-     * @param string $database
-     * @param string $env      The application environment (dev, prod).
-     * @param array  $bundles  The application bundles metadata.
+     * @param array  $connectionParams The database connection parameters (driver, host, etc.).
+     * @param string $env              The application environment (dev, prod).
+     * @param array  $bundles          The application bundles metadata.
      *
      * @return EntityManagerInterface
      */
-    public static function factory(
-        string $driver,
-        string $host,
-        int $port,
-        string $user,
-        string $password,
-        string $database,
-        string $env,
-        array $bundles
-    ): EntityManagerInterface {
-        $connParams = [
-            'driver' => $driver,
-            'host' => $host,
-            'port' => $port,
-            'user' => $user,
-            'password' => $password,
-            'dbname' => $database,
-        ];
-
+    public static function factory(array $connectionParams, string $env, array $bundles): EntityManagerInterface
+    {
         $isDev = in_array($env, ['dev', 'test'], true);
 
         // Determine the paths where the mapping files should be located.
@@ -68,6 +46,6 @@ class EntityManagerFactory
             self::MAPPING_FILES_EXTENSION
         )));
 
-        return EntityManager::create($connParams, $config);
+        return EntityManager::create($connectionParams, $config);
     }
 }
