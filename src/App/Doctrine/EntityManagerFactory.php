@@ -2,7 +2,6 @@
 
 namespace App\Doctrine;
 
-use Doctrine\Common\EventManager;
 use Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;

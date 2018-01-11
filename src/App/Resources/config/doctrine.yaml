@@ -4,8 +4,6 @@ services:
         autoconfigure: true
         public: false
 
-    Doctrine\Common\EventManager:
-
     Doctrine\ORM\EntityManagerInterface:
         factory: [App\Doctrine\EntityManagerFactory, factory]
         arguments:

@@ -5,6 +5,9 @@ namespace App\Doctrine;
 use Doctrine\Common\EventArgs;
 use Doctrine\Common\EventManager as BaseEventManager;
 
+/**
+ * Doctrine event manager which allows the registering of lazy-loading listeners.
+ */
 class EventManager extends BaseEventManager
 {
     /**
@@ -43,5 +46,43 @@ class EventManager extends BaseEventManager
         }
         // Mark the listeners for this event as loaded.
         $this->initialized[$eventName] = true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getListeners($event = null)
+    {
+        return $event ? $this->listeners[$event] : $this->listeners;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasListeners($event)
+    {
+        return !empty($this->listeners[$event]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addEventListener($events, $listener)
+    {
+        $hash = spl_object_hash($listener);
+        foreach ((array) $events as $event) {
+            $this->listeners[$event][$hash] = $listener;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeEventListener($events, $listener)
+    {
+        $hash = spl_object_hash($listener);
+        foreach ((array) $events as $event) {
+            unset($this->listeners[$event][$hash]);
+        }
     }
 }
