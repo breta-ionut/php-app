@@ -8,7 +8,7 @@ ini_set('display_errors', 'on');
 
 require __DIR__.'/../vendor/autoload.php';
 
-$kernel = new Kernel(getenv('env') ?: 'dev', getenv('debug') ?: true);
+$kernel = new Kernel($_SERVER['APP_ENV'] ?? 'dev', (bool) ($_SERVER['APP_DEBUG'] ?? true));
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
