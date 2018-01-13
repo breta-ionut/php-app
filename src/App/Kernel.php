@@ -10,7 +10,6 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface;
@@ -75,17 +74,6 @@ class Kernel extends BaseKernel
     protected function getHttpKernel()
     {
         return $this->container->get(HttpKernel::class);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function initializeContainer()
-    {
-        $dotenv = new Dotenv();
-        $dotenv->load($this->getConfigDir().'/parameters.env');
-
-        parent::initializeContainer();
     }
 
     /**
