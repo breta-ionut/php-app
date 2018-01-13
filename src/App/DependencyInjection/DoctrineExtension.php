@@ -2,6 +2,8 @@
 
 namespace App\DependencyInjection;
 
+use App\DependencyInjection\Compiler\Doctrine\RegisterEventListenersAndSubscribersPass;
+use Doctrine\Common\EventSubscriber;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -25,5 +27,9 @@ class DoctrineExtension extends ConfigurableExtension
         foreach ($configs as $key => $value) {
             $container->setParameter("doctrine.$key", $value);
         }
+
+        // Tag all services implementing the Doctrine event subscriber interface with the event subscriber tag.
+        $container->registerForAutoconfiguration(EventSubscriber::class)
+            ->addTag(RegisterEventListenersAndSubscribersPass::SUBSCRIBER_TAG);
     }
 }

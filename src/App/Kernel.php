@@ -4,6 +4,7 @@ namespace App;
 
 use App\DependencyInjection\ApplicationExtension;
 use App\DependencyInjection\Compiler\ContainerAwarePass;
+use App\DependencyInjection\Compiler\Doctrine\RegisterEventListenersAndSubscribersPass;
 use App\DependencyInjection\DoctrineExtension;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass;
@@ -137,7 +138,8 @@ class Kernel extends BaseKernel
         $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class))
             ->addCompilerPass(new RegisterControllerArgumentLocatorsPass(ArgumentResolverInterface::class))
             ->addCompilerPass(new AddConsoleCommandPass())
-            ->addCompilerPass(new ContainerAwarePass());
+            ->addCompilerPass(new ContainerAwarePass())
+            ->addCompilerPass(new RegisterEventListenersAndSubscribersPass());
     }
 
     /**
