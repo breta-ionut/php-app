@@ -26,6 +26,7 @@ services:
         public: true
     Symfony\Component\EventDispatcher\EventDispatcherInterface:
         alias: Symfony\Component\EventDispatcher\EventDispatcher
+        public: true
 
     Symfony\Component\HttpKernel\Controller\ContainerControllerResolver:
     Symfony\Component\HttpKernel\Controller\ControllerResolverInterface: '@Symfony\Component\HttpKernel\Controller\ContainerControllerResolver'
