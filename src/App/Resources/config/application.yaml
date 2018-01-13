@@ -4,14 +4,10 @@ services:
         autoconfigure: true
         public: false
         bind:
-            $env: '%kernel.environment%'
             $debug: '%kernel.debug%'
-            $rootDir: '%kernel.root_dir%'
             $projectDir: '%kernel.project_dir%'
             $configDir: '%kernel.config_dir%'
             $cacheDir: '%kernel.cache_dir%'
-            $logsDir: '%kernel.logs_dir%'
-            $bundles: '%kernel.bundles%'
             $bundlesMetadata: '%kernel.bundles_metadata%'
 
     App\:
@@ -21,6 +17,7 @@ services:
     Psr\Container\ContainerInterface: '@service_container'
 
     kernel:
+        class: Symfony\Component\HttpKernel\KernelInterface
         synthetic: true
         public: true
     Symfony\Component\HttpKernel\KernelInterface: '@kernel'
