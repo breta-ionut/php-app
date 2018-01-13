@@ -51,7 +51,9 @@ class CacheClearCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            $this->filesystem->remove($this->cacheDir . '/*');
+            $this->filesystem->remove($this->cacheDir.'/*');
+
+            $output->writeln('<info>Successfully cleared the cache!</info>');
         } catch (\Throwable $exception) {
             $output->writeln(sprintf(
                 '<error>The cache clearing failed. Reported error: "%s".</error>',
