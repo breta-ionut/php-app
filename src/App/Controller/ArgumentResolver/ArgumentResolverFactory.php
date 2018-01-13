@@ -2,7 +2,6 @@
 
 namespace App\Controller\ArgumentResolver;
 
-use Psr\Container\ContainerInterface;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver;
 use Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver;
@@ -20,11 +19,11 @@ class ArgumentResolverFactory
     /**
      * Creates an argument resolver.
      *
-     * @param ContainerInterface $container
+     * @param ServiceValueResolver $serviceValueResolver
      *
      * @return ArgumentResolverInterface
      */
-    public static function factory(ContainerInterface $container): ArgumentResolverInterface
+    public static function factory(ServiceValueResolver $serviceValueResolver): ArgumentResolverInterface
     {
         return new ArgumentResolver(null, [
             new RequestAttributeValueResolver(),
@@ -32,7 +31,7 @@ class ArgumentResolverFactory
             new SessionValueResolver(),
             new DefaultValueResolver(),
             new VariadicValueResolver(),
-            new ServiceValueResolver($container),
+            $serviceValueResolver,
         ]);
     }
 }

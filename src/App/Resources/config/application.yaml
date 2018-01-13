@@ -22,6 +22,7 @@ services:
 
     kernel:
         synthetic: true
+        public: true
     Symfony\Component\HttpKernel\KernelInterface: '@kernel'
 
     Symfony\Component\EventDispatcher\EventDispatcher: ~
@@ -33,6 +34,8 @@ services:
 
     Symfony\Component\HttpFoundation\RequestStack: ~
 
+    Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver:
+        arguments: [~]
     Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface:
         factory: [App\Controller\ArgumentResolver\ArgumentResolverFactory, factory]
 
