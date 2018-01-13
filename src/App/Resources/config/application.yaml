@@ -22,7 +22,8 @@ services:
         public: true
     Symfony\Component\HttpKernel\KernelInterface: '@kernel'
 
-    Symfony\Component\EventDispatcher\EventDispatcher: ~
+    Symfony\Component\EventDispatcher\EventDispatcher:
+        public: true
     Symfony\Component\EventDispatcher\EventDispatcherInterface:
         alias: Symfony\Component\EventDispatcher\EventDispatcher
 
