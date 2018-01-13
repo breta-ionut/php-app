@@ -3,6 +3,16 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $env: '%kernel.environment%'
+            $debug: '%kernel.debug%'
+            $rootDir: '%kernel.root_dir%'
+            $projectDir: '%kernel.project_dir%'
+            $configDir: '%kernel.config_dir%'
+            $cacheDir: '%kernel.cache_dir%'
+            $logsDir: '%kernel.logs_dir%'
+            $bundles: '%kernel.bundles%'
+            $bundlesMetadata: '%kernel.bundles_metadata%'
 
     App\:
         resource: '../../*'
@@ -10,24 +20,19 @@ services:
     # The application kernel.
     kernel:
         synthetic: true
-        public: true
     Symfony\Component\HttpKernel\KernelInterface: '@kernel'
 
-    Symfony\Component\EventDispatcher\EventDispatcher:
-        public: true
+    Symfony\Component\EventDispatcher\EventDispatcher: ~
     Symfony\Component\EventDispatcher\EventDispatcherInterface:
         alias: Symfony\Component\EventDispatcher\EventDispatcher
-        public: true
 
     Symfony\Component\HttpKernel\Controller\ContainerControllerResolver:
     Symfony\Component\HttpKernel\Controller\ControllerResolverInterface: '@Symfony\Component\HttpKernel\Controller\ContainerControllerResolver'
 
-    Symfony\Component\HttpFoundation\RequestStack:
-        public: true
+    Symfony\Component\HttpFoundation\RequestStack: ~
 
     Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface:
         factory: [App\Controller\ArgumentResolver\ArgumentResolverFactory, factory]
-        arguments: ["@service_container"]
 
     Symfony\Component\HttpKernel\HttpKernel:
         public: true
@@ -35,12 +40,6 @@ services:
     # The application routing system.
     Symfony\Component\Routing\Router:
         factory: [App\Routing\RouterFactory, factory]
-        arguments:
-            $bundles: "%kernel.bundles_metadata%"
-            $configDir: "%kernel.config_dir%"
-            $cacheDir: "%kernel.cache_dir%"
-            $debug: "%kernel.debug%"
-        public: true
     Symfony\Component\Routing\RouterInterface: '@Symfony\Component\Routing\Router'
     Symfony\Component\Routing\Matcher\RequestMatcherInterface: '@Symfony\Component\Routing\Router'
 
@@ -51,5 +50,6 @@ services:
     # The application templating system.
     Symfony\Component\Templating\EngineInterface:
         factory: [App\Templating\TemplatingEngineFactory, factory]
-        arguments: ["%kernel.project_dir%"]
-        public: true
+
+    # Other utilities.
+    Symfony\Component\Filesystem\Filesystem: ~

@@ -19,7 +19,7 @@ class RouterFactory
     /**
      * Creates a router instance.
      *
-     * @param array        $bundles      The bundles metadata.
+     * @param array        $bundlesMetadata
      * @param string       $configDir
      * @param string       $cacheDir
      * @param bool         $debug
@@ -28,7 +28,7 @@ class RouterFactory
      * @return Router
      */
     public static function factory(
-        array $bundles,
+        array $bundlesMetadata,
         string $configDir,
         string $cacheDir,
         bool $debug,
@@ -38,8 +38,8 @@ class RouterFactory
 
         // Get the routing configs from the bundles.
         $routingConfigs = [];
-        foreach ($bundles as $bundle) {
-            $routingConfig = $bundle['path'].'/'.self::BUNDLE_ROUTING_CONFIG_PATH;
+        foreach ($bundlesMetadata as $bundleMetadata) {
+            $routingConfig = $bundleMetadata['path'].'/'.self::BUNDLE_ROUTING_CONFIG_PATH;
             if (file_exists($routingConfig)) {
                 $routingConfigs[] = $routingConfig;
             }

@@ -22,7 +22,7 @@ class EntityManagerFactory
      *
      * @param array        $connectionParams The database connection parameters (driver, host, etc.).
      * @param string       $env              The application environment (dev, prod).
-     * @param array        $bundles          The application bundles metadata.
+     * @param array        $bundlesMetadata
      * @param EventManager $eventManager
      *
      * @return EntityManagerInterface
@@ -30,19 +30,19 @@ class EntityManagerFactory
     public static function factory(
         array $connectionParams,
         string $env,
-        array $bundles,
+        array $bundlesMetadata,
         EventManager $eventManager
     ): EntityManagerInterface {
         $isDev = in_array($env, ['dev', 'test'], true);
 
         // Determine the paths where the mapping files should be located.
         $mappingPaths = [];
-        foreach ($bundles as $bundle) {
-            if (!is_dir($bundleMappingPath = $bundle['path'].'/'.self::MAPPING_BUNDLE_PATH)) {
+        foreach ($bundlesMetadata as $bundleMetadata) {
+            if (!is_dir($bundleMappingPath = $bundleMetadata['path'].'/'.self::MAPPING_BUNDLE_PATH)) {
                 continue;
             }
 
-            $mappingPaths[$bundleMappingPath] = $bundle['namespace'].'\\'.self::MAPPING_BUNDLE_NAMESPACE;
+            $mappingPaths[$bundleMappingPath] = $bundleMetadata['namespace'].'\\'.self::MAPPING_BUNDLE_NAMESPACE;
         }
 
         $config = Setup::createConfiguration($isDev);
