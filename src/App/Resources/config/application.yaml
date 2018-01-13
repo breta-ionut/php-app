@@ -18,6 +18,8 @@ services:
         resource: '../../*'
 
     # The application kernel.
+    Psr\Container\ContainerInterface: '@service_container'
+
     kernel:
         synthetic: true
     Symfony\Component\HttpKernel\KernelInterface: '@kernel'
