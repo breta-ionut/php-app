@@ -1,5 +1,5 @@
 {
-    "name": "php",
+    "name": "php-app",
     "description": "PHP application based on Symfony components.",
     "authors": [
         {
