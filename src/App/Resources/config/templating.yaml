@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Symfony\Component\Templating\EngineInterface:
+        factory: [App\Templating\TemplatingEngineFactory, factory]
+        arguments: ['%kernel.project_dir%']

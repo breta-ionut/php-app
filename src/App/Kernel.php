@@ -2,10 +2,13 @@
 
 namespace App;
 
-use App\DependencyInjection\ApplicationExtension;
 use App\DependencyInjection\Compiler\ContainerAwarePass;
 use App\DependencyInjection\Compiler\Doctrine\RegisterEventListenersAndSubscribersPass;
 use App\DependencyInjection\DoctrineExtension;
+use App\DependencyInjection\KernelExtension;
+use App\DependencyInjection\RoutingExtension;
+use App\DependencyInjection\TemplatingExtension;
+use App\DependencyInjection\UtilsExtension;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -138,7 +141,10 @@ class Kernel extends BaseKernel
     private function getDefaultExtensions(): array
     {
         return [
-            new ApplicationExtension(),
+            new KernelExtension(),
+            new RoutingExtension(),
+            new TemplatingExtension(),
+            new UtilsExtension(),
             new DoctrineExtension(),
         ];
     }

@@ -1,0 +1,15 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Symfony\Component\Routing\Router:
+        factory: [App\Routing\RouterFactory, factory]
+        arguments: ['%kernel.bundles_metadata%', '%kernel.config_dir%', '%kernel.cache_dir%', '%kernel.debug%']
+    Symfony\Component\Routing\RouterInterface: '@Symfony\Component\Routing\Router'
+    Symfony\Component\Routing\Matcher\RequestMatcherInterface: '@Symfony\Component\Routing\Router'
+
+    App\Routing\RouterListener:
+        tags:
+            - {name: kernel.event_listener, event: kernel.request, method: onRequest, priority: 32}

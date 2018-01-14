@@ -8,16 +8,16 @@ services:
         factory: [App\Doctrine\EntityManagerFactory, factory]
         arguments:
             -
-                driver: "%doctrine.driver%"
-                host: "%doctrine.host%"
-                port: "%doctrine.port%"
-                user: "%doctrine.user%"
-                password: "%doctrine.password%"
-                dbname: "%doctrine.database%"
-                charset: "%doctrine.charset%"
+                driver: '%doctrine.driver%'
+                host: '%doctrine.host%'
+                port: '%doctrine.port%'
+                user: '%doctrine.user%'
+                password: '%doctrine.password%'
+                dbname: '%doctrine.database%'
+                charset: '%doctrine.charset%'
                 defaultTableOptions:
-                    charset: "%doctrine.charset%"
-                    collate: "%doctrine.collate%"
-            - "%kernel.environment%"
-            - "%kernel.bundles_metadata%"
+                    charset: '%doctrine.charset%'
+                    collate: '%doctrine.collate%'
+            - '%kernel.environment%'
+            - '%kernel.bundles_metadata%'
         public: true

@@ -3,24 +3,17 @@ services:
         autowire: true
         autoconfigure: true
         public: false
-        bind:
-            $debug: '%kernel.debug%'
-            $projectDir: '%kernel.project_dir%'
-            $configDir: '%kernel.config_dir%'
-            $cacheDir: '%kernel.cache_dir%'
-            $bundlesMetadata: '%kernel.bundles_metadata%'
 
     App\:
         resource: '../../*'
-
-    # The application kernel.
-    Psr\Container\ContainerInterface: '@service_container'
 
     kernel:
         class: Symfony\Component\HttpKernel\KernelInterface
         synthetic: true
         public: true
     Symfony\Component\HttpKernel\KernelInterface: '@kernel'
+
+    Psr\Container\ContainerInterface: '@service_container'
 
     Symfony\Component\EventDispatcher\EventDispatcher:
         public: true
@@ -40,20 +33,3 @@ services:
 
     Symfony\Component\HttpKernel\HttpKernel:
         public: true
-
-    # The application routing system.
-    Symfony\Component\Routing\Router:
-        factory: [App\Routing\RouterFactory, factory]
-    Symfony\Component\Routing\RouterInterface: '@Symfony\Component\Routing\Router'
-    Symfony\Component\Routing\Matcher\RequestMatcherInterface: '@Symfony\Component\Routing\Router'
-
-    App\Routing\RouterListener:
-        tags:
-            - {name: kernel.event_listener, event: kernel.request, method: onRequest, priority: 32}
-
-    # The application templating system.
-    Symfony\Component\Templating\EngineInterface:
-        factory: [App\Templating\TemplatingEngineFactory, factory]
-
-    # Other utilities.
-    Symfony\Component\Filesystem\Filesystem: ~
