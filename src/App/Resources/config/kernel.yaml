@@ -3,6 +3,8 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $cacheDir: '%kernel.cache_dir%'
 
     App\:
         resource: '../../*'
