@@ -29,7 +29,9 @@ class AssetsConfiguration implements ConfigurationInterface
                     ->defaultValue('%%s?%%s')
                 ->end()
 
-                ->scalarNode('version')->end()
+                ->scalarNode('version')
+                    ->defaultNull()
+                ->end()
             ->end();
 
         return $treeBuilder;
