@@ -4,6 +4,6 @@ services:
         autoconfigure: true
         public: false
 
-    Symfony\Asset\PackageInterface:
+    Symfony\Component\Asset\PackageInterface:
         factory: [App\Assets\PackageFactory, factory]
         arguments: ['%assets.base_path%', '%assets.version_format%', '%assets.version%']
