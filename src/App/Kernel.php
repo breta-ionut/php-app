@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\DependencyInjection\AssetsExtension;
 use App\DependencyInjection\Compiler\ContainerAwarePass;
 use App\DependencyInjection\Compiler\Doctrine\RegisterEventListenersAndSubscribersPass;
 use App\DependencyInjection\DoctrineExtension;
@@ -145,6 +146,7 @@ class Kernel extends BaseKernel
             new RoutingExtension(),
             new TemplatingExtension(),
             new UtilsExtension(),
+            new AssetsExtension(),
             new DoctrineExtension(),
         ];
     }
