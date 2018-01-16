@@ -3,7 +3,7 @@
 namespace App\Templating;
 
 use Symfony\Component\Templating\EngineInterface;
-use Symfony\Component\Templating\Helper\SlotsHelper;
+use Symfony\Component\Templating\Helper\HelperInterface;
 use Symfony\Component\Templating\Loader\FilesystemLoader;
 use Symfony\Component\Templating\PhpEngine;
 use Symfony\Component\Templating\TemplateNameParser;
@@ -18,14 +18,15 @@ class TemplatingEngineFactory
     /**
      * Instantiates the app's templating engine.
      *
-     * @param string $projectDir
+     * @param string            $projectDir
+     * @param HelperInterface[] $helpers
      *
      * @return EngineInterface
      */
-    public static function factory(string $projectDir): EngineInterface
+    public static function factory(string $projectDir, array $helpers): EngineInterface
     {
         $loader = new FilesystemLoader([$projectDir.'/'.self::APP_TEMPLATES_PATH]);
-        $engine = new PhpEngine(new TemplateNameParser(), $loader, [new SlotsHelper()]);
+        $engine = new PhpEngine(new TemplateNameParser(), $loader, $helpers);
 
         return $engine;
     }

@@ -4,6 +4,10 @@ services:
         autoconfigure: true
         public: false
 
+    Symfony\Component\Templating\Helper\SlotsHelper: ~
+
     Symfony\Component\Templating\EngineInterface:
         factory: [App\Templating\TemplatingEngineFactory, factory]
-        arguments: ['%kernel.project_dir%']
+        arguments:
+            - '%kernel.project_dir%'
+            - ['@Symfony\Component\Templating\Helper\SlotsHelper', '@App\Templating\Helper\AssetsHelper']
