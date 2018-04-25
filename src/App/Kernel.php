@@ -32,14 +32,11 @@ class Kernel extends BaseKernel
     public function registerBundles()
     {
         $bundlesConfig = require $this->getConfigDir().'/bundles.php';
-        $bundles = [];
         foreach ($bundlesConfig as $class => $envs) {
             if (!empty($envs['all']) || !empty($envs[$this->environment])) {
-                $bundles[] = new $class();
+                yield new $class();
             }
         }
-
-        return $bundles;
     }
 
     /**
