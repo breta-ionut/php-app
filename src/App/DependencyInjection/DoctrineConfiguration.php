@@ -24,25 +24,7 @@ class DoctrineConfiguration implements ConfigurationInterface
                     ->cannotBeEmpty()
                 ->end()
 
-                ->scalarNode('host')
-                    ->cannotBeEmpty()
-                    ->defaultValue('localhost')
-                ->end()
-
-                ->scalarNode('port')
-                    ->cannotBeEmpty()
-                    ->defaultValue(3306)
-                ->end()
-
-                ->scalarNode('user')
-                    ->cannotBeEmpty()
-                ->end()
-
-                ->scalarNode('password')
-                    ->cannotBeEmpty()
-                ->end()
-
-                ->scalarNode('database')
+                ->scalarNode('url')
                     ->cannotBeEmpty()
                 ->end()
 
