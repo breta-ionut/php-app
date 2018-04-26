@@ -1,5 +1,5 @@
 <?php
 
 return [
-    \Bundles\User\UserBundle::class => ['all' => true],
+    Bundles\User\UserBundle::class => ['all' => true],
 ];
