@@ -20,7 +20,7 @@ class EntityManagerFactory
     /**
      * Creates an entity manager given the database connection parameters and some application details.
      *
-     * @param array        $connectionParams The database connection parameters (driver, host, etc.).
+     * @param array        $connectionParams The database connection parameters (driver, URL, etc.).
      * @param string       $env              The application environment (dev, prod).
      * @param array        $bundlesMetadata
      * @param EventManager $eventManager

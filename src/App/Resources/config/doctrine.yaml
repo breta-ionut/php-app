@@ -9,11 +9,7 @@ services:
         arguments:
             -
                 driver: '%doctrine.driver%'
-                host: '%doctrine.host%'
-                port: '%doctrine.port%'
-                user: '%doctrine.user%'
-                password: '%doctrine.password%'
-                dbname: '%doctrine.database%'
+                url: '%doctrine.url%'
                 charset: '%doctrine.charset%'
                 defaultTableOptions:
                     charset: '%doctrine.charset%'
