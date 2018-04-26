@@ -5,7 +5,7 @@ namespace App\Doctrine;
 use Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Driver\YamlDriver;
+use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Doctrine\ORM\Tools\Setup;
 
 /**
@@ -15,7 +15,7 @@ class EntityManagerFactory
 {
     private const MAPPING_BUNDLE_PATH = 'Resources/config/doctrine';
     private const MAPPING_BUNDLE_NAMESPACE = 'Model';
-    private const MAPPING_FILES_EXTENSION = '.yaml';
+    private const MAPPING_FILES_EXTENSION = '.xml';
 
     /**
      * Creates an entity manager given the database connection parameters and some application details.
@@ -46,7 +46,7 @@ class EntityManagerFactory
         }
 
         $config = Setup::createConfiguration($isDev);
-        $config->setMetadataDriverImpl(new YamlDriver(new SymfonyFileLocator(
+        $config->setMetadataDriverImpl(new XmlDriver(new SymfonyFileLocator(
             $mappingPaths,
             self::MAPPING_FILES_EXTENSION
         )));
