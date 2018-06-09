@@ -122,7 +122,7 @@ class Kernel extends BaseKernel
      *
      * @param ContainerBuilder $container
      */
-    private function addDefaultCompilerPasses(ContainerBuilder $container)
+    private function addDefaultCompilerPasses(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class))
             ->addCompilerPass(new RegisterControllerArgumentLocatorsPass(ServiceValueResolver::class))
@@ -153,7 +153,7 @@ class Kernel extends BaseKernel
      *
      * @param ContainerBuilder $container
      */
-    private function addDefaultExtensions(ContainerBuilder $container)
+    private function addDefaultExtensions(ContainerBuilder $container): void
     {
         foreach ($this->getDefaultExtensions() as $extension) {
             $container->registerExtension($extension);
