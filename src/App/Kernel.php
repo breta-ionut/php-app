@@ -12,6 +12,8 @@ use App\DependencyInjection\TemplatingExtension;
 use App\DependencyInjection\UtilsExtension;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass;
+use Symfony\Component\DependencyInjection\Compiler\RegisterServiceSubscribersPass;
+use Symfony\Component\DependencyInjection\Compiler\ResolveServiceSubscribersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
@@ -126,6 +128,8 @@ class Kernel extends BaseKernel
     {
         $container->addCompilerPass(new RegisterListenersPass(EventDispatcher::class))
             ->addCompilerPass(new RegisterControllerArgumentLocatorsPass(ServiceValueResolver::class))
+            ->addCompilerPass(new RegisterServiceSubscribersPass())
+            ->addCompilerPass(new ResolveServiceSubscribersPass())
             ->addCompilerPass(new AddConsoleCommandPass())
             ->addCompilerPass(new ContainerAwarePass())
             ->addCompilerPass(new RegisterEventListenersAndSubscribersPass());
