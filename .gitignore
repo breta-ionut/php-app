@@ -1,5 +1,6 @@
 .idea
 config/parameters.env
+node_modules
 var/cache/*
 !var/cache/.gitkeep
 var/logs/*
