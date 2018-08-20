@@ -3,7 +3,6 @@
 namespace App;
 
 use App\DependencyInjection\AssetsExtension;
-use App\DependencyInjection\Compiler\ContainerAwarePass;
 use App\DependencyInjection\Compiler\Doctrine\RegisterEventListenersAndSubscribersPass;
 use App\DependencyInjection\DoctrineExtension;
 use App\DependencyInjection\KernelExtension;
@@ -131,7 +130,6 @@ class Kernel extends BaseKernel
             ->addCompilerPass(new RegisterServiceSubscribersPass())
             ->addCompilerPass(new ResolveServiceSubscribersPass())
             ->addCompilerPass(new AddConsoleCommandPass())
-            ->addCompilerPass(new ContainerAwarePass())
             ->addCompilerPass(new RegisterEventListenersAndSubscribersPass());
     }
 
