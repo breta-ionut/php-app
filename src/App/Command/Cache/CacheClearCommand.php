@@ -5,6 +5,7 @@ namespace App\Command\Cache;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -50,15 +51,14 @@ class CacheClearCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $style = new SymfonyStyle($input, $output);
+
         try {
             $this->filesystem->remove($this->cacheDir);
 
-            $output->writeln('<info>Successfully cleared the cache!</info>');
+            $style->success('Successfully cleared the cache!');
         } catch (\Throwable $exception) {
-            $output->writeln(sprintf(
-                '<error>The cache clearing failed. Reported error: "%s".</error>',
-                $exception->getMessage()
-            ));
+            $style->error(sprintf('The cache clearing failed. Reported error: %s', $exception->getMessage()));
         }
     }
 }
